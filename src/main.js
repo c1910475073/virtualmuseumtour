@@ -1,5 +1,6 @@
 import * as THREE from '../lib/three.module.js'
 import { Room } from './Room.js'
+import { Player } from './Player.js'
 
 let container
 let camera
