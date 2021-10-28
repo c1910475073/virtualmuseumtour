@@ -8,6 +8,7 @@ let scene
 let light
 let renderer
 let room
+let player
 
 init()
 initModels()
@@ -20,6 +21,9 @@ function init(){
 	document.body.appendChild(container)
 
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 10000)
+
+	camera.position.set(0,0.5,5)
+	//camera.lookAt(new THREE.Vector3(0,0,-5))
 
 	scene = new THREE.Scene()
 	scene.background = new THREE.Color(0xAAAAFF)	// 0xRRGGBB (RR is the level of red, GG green, and BB blue)
@@ -66,6 +70,8 @@ function init(){
 function initModels(){
 	room = new Room()
 	room.loadRoom(onRoomLoaded)
+
+	player = new Player()
 }
 
 function onRoomLoaded(){
@@ -75,6 +81,12 @@ function onRoomLoaded(){
 
 function animate(){
 	requestAnimationFrame(animate)
+
+	camera.position.x -= player.dx/20
+	camera.position.z -= player.dz/20
+
+	camera.rotation.y = player.direction
+
 	render()
 }
 
