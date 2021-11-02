@@ -2,6 +2,10 @@ import * as THREE from '../lib/three.module.js'
 import { Lab } from './Lab.js'
 import { Player } from './Player.js'
 
+const mouse = new THREE.Vector2();
+const target = new THREE.Vector2();
+const windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 );
+
 let container
 let camera
 let scene
@@ -38,6 +42,9 @@ function init(){
 
 	// html body -> div container -> DOM (document object model) element of the renderer
 	container.appendChild(renderer.domElement)
+
+	document.addEventListener('mousemove', onMouseMove, false)
+	document.addEventListener('wheel', onMouseWheel, false)
 
 	window.addEventListener('resize', onWindowResize)
 
