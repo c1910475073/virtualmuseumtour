@@ -29,9 +29,6 @@ function init(){
 	camera.position.set(0,0.5,5)
 	//camera.lookAt(new THREE.Vector3(0,0,-5))
 
-	camera.position.set(0,0.5,5)
-	//camera.lookAt(new THREE.Vector3(0,0,-5))
-
 	scene = new THREE.Scene()
 	scene.background = new THREE.Color(0xFFFFFF)	// 0xRRGGBB (RR is the level of red, GG green, and BB blue)
 
@@ -97,7 +94,13 @@ function animate(){
 	camera.position.x -= player.dx/20
 	camera.position.z -= player.dz/20
 
-	camera.rotation.y = player.direction
+	//camera.rotation.y = player.direction
+
+	target.x = ( 1 - mouse.x ) * 0.008;
+	//target.y = ( 1 - mouse.y ) * 0.002;
+	
+	//camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
+	camera.rotation.y += 1.5 * ( target.x - camera.rotation.y );
 
 	render()
 }
