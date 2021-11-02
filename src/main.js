@@ -1,5 +1,5 @@
 import * as THREE from '../lib/three.module.js'
-import { Lab } from './Lab.js'
+import { Room } from './Room.js'
 import { Player } from './Player.js'
 
 const mouse = new THREE.Vector2();
@@ -11,11 +11,11 @@ let camera
 let scene
 let light
 let renderer
-let lab 	//It cant be called "Lab" because of the class name
+let room
 let player
 
 init()
-initObjects()
+initModels()
 animate()
 
 function init(){
@@ -26,6 +26,9 @@ function init(){
 
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 10000)
 	
+	camera.position.set(0,0.5,5)
+	//camera.lookAt(new THREE.Vector3(0,0,-5))
+
 	camera.position.set(0,0.5,5)
 	//camera.lookAt(new THREE.Vector3(0,0,-5))
 
@@ -76,16 +79,17 @@ function init(){
 	}
 }*/
 
-function initObjects(){
-	lab = new Lab()
-	lab.loadLab(onLabLoaded)	//Only when the 3d object "Lab" is loaded
+function initModels(){
+	room = new Room()
+	room.loadRoom(onRoomLoaded)
 
 	player = new Player()
 }
 
-function onLabLoaded(){
-	scene.add(lab.getLab())
+function onRoomLoaded(){
+	scene.add(room.getRoom())
 }
+
 
 function animate(){
 	requestAnimationFrame(animate)
@@ -94,8 +98,8 @@ function animate(){
 	camera.position.z -= player.dz/20
 
 	camera.rotation.y = player.direction
-	
-	render()	
+
+	render()
 }
 
 function render(){
@@ -103,7 +107,7 @@ function render(){
 }
 
 function onWindowResize(){
-	//console.log("resize")
+	console.log("resize")
 	camera.aspect = window.innerWidth/window.innerHeight
 	camera.updateProjectionMatrix()
 	renderer.setSize(window.innerWidth, window.innerHeight)
