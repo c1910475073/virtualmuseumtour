@@ -86,7 +86,7 @@ function animate(){
 	//target.y = ( 1 - mouse.y ) * 0.002;
 	
 	//camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
-	camera.rotation.y += 0.5 * ( target.x - camera.rotation.y );
+	camera.rotation.y += 0.5 * ( target.x - camera.rotation.y );	//THE MOVEMENT ORIENTATION IS NOT THE SAME AS THE CAMERA
 
 	render()
 }
