@@ -26,7 +26,7 @@ function init(){
 
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 10000)
 	
-	camera.position.set(0,0.5,5)
+	camera.position.set(0,0,2)
 	//camera.lookAt(new THREE.Vector3(0,0,-5))
 
 	scene = new THREE.Scene()
@@ -61,6 +61,18 @@ function onRoomLoaded(){
 	scene.add(room.getRoom())
 }
 
+function onMouseMove( event ) {
+
+	mouse.x = ( event.clientX - windowHalf.x );
+	mouse.y = ( event.clientY - windowHalf.x );
+
+}
+
+function onMouseWheel( event ) {
+
+  camera.position.z += event.deltaY * 0.1; // move camera along z-axis
+
+}
 
 function animate(){
 	requestAnimationFrame(animate)
@@ -70,11 +82,11 @@ function animate(){
 
 	//camera.rotation.y = player.direction
 
-	target.x = ( 1 - mouse.x ) * 0.008;
+	target.x = ( 1 - mouse.x ) * 0.002;
 	//target.y = ( 1 - mouse.y ) * 0.002;
 	
 	//camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
-	camera.rotation.y += 1.5 * ( target.x - camera.rotation.y );
+	camera.rotation.y += 0.5 * ( target.x - camera.rotation.y );
 
 	render()
 }
