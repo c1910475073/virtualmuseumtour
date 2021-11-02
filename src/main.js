@@ -50,32 +50,6 @@ function init(){
 
 }
 
-/*function onKeyDown(event){
-	console.log("keydown", event.keyCode)
-
-	if( (event.keyCode == 87) || (event.keyCode == 38)){
-		//w or up
-		camera.position.z -= 0.1
-	} else if ( (event.keyCode == 65) || (event.keyCode == 37)){
-		//a or left
-		//camera.position.x -= 0.1
-		camera.rotation.y += 0.1
-	} else if ( (event.keyCode == 83) || (event.keyCode == 40)){
-		//s or back
-		camera.position.z += 0.1
-	} else if ( (event.keyCode == 68) || (event.keyCode == 39)){
-		//d or right
-		//camera.position.x += 0.1
-		camera.rotation.y -= 0.1
-	} else if (event.keyCode == 81){
-		//camera up
-		camera.position.y += 0.1
-	} else if (event.keyCode == 69){
-		//camera down
-		camera.position.y -= 0.1
-	}
-}*/
-
 function initModels(){
 	room = new Room()
 	room.loadRoom(onRoomLoaded)
