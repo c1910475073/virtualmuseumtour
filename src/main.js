@@ -1,6 +1,7 @@
 import * as THREE from '../lib/three.module.js'
 import { Room } from './Room.js'
 import { Player } from './Player.js'
+import { Venus} from './Venus.js'
 
 const mouse = new THREE.Vector2();
 const target = new THREE.Vector2();
@@ -13,6 +14,7 @@ let light
 let renderer
 let room
 let player
+let venus
 
 init()
 initModels()
@@ -54,11 +56,19 @@ function initModels(){
 	room = new Room()
 	room.loadRoom(onRoomLoaded)
 
+	venus = new Venus()
+	venus.loadVenus(onVenusLoaded)
+
 	player = new Player()
 }
 
+
 function onRoomLoaded(){
 	scene.add(room.getRoom())
+}
+
+function onVenusLoaded(){
+	scene.add(venus.getVenus())
 }
 
 function onMouseMove( event ) {
