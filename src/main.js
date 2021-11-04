@@ -1,11 +1,12 @@
 import * as THREE from '../lib/three.module.js'
+import { PointerLockControls } from '../lib/PointerLockControls.js'
 import { Room } from './Room.js'
 import { Player } from './Player.js'
-import { Venus} from './Venus.js'
+import { Venus } from './Venus.js'
 
 const mouse = new THREE.Vector2();
 const target = new THREE.Vector2();
-const windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 );
+const windowHalf = new THREE.Vector2( window.innerWidth/2, window.innerHeight/2 );
 
 let container
 let camera
@@ -17,6 +18,7 @@ let player
 let venus
 let raycaster
 let pointer
+let element
 
 init()
 initModels()
@@ -49,6 +51,33 @@ function init(){
 
 	raycaster = new THREE.Raycaster()
 	pointer = new THREE.Vector2()
+	/*
+	element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock ||	element.webkitRequestPointerLock;
+	
+	// Ask the browser to lock the pointer
+	element.requestPointerLock();
+
+	// Ask the browser to release the pointer
+	document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
+	document.exitPointerLock();
+	*/
+	
+	/*
+	const menuPanel = document.getElementById('menuPanel') //as HTMLDivElement
+	const startButton = document.getElementById('startButton') //as HTMLInputElement
+	startButton.addEventListener(
+		'click',
+		function () {
+			controls.lock()
+		},
+		false
+	)
+
+	const controls = new PointerLockControls(camera, renderer.domElement)
+	//controls.addEventListener('change', () => console.log("Controls Change"))
+	controls.addEventListener('lock', () => (menuPanel.style.display = 'none'))
+	controls.addEventListener('unlock', () => (menuPanel.style.display = 'block'))
+	*/
 
 	document.addEventListener('mousemove', onMouseMove, false)
 	document.addEventListener('mousedown', onMouseDown, false)
@@ -70,10 +99,12 @@ function initModels(){
 
 
 function onRoomLoaded(){
+
 	scene.add(room.getRoom())
 }
 
 function onVenusLoaded(){
+
 	scene.add(venus.getVenus())
 }
 
@@ -81,10 +112,10 @@ function onMouseMove( event ) {
 
 	mouse.x = ( event.clientX - windowHalf.x );
 	mouse.y = ( event.clientY - windowHalf.x );
-
 }
 
 function onMouseDown(event){
+
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;	
 	raycast(true)
@@ -93,7 +124,6 @@ function onMouseDown(event){
 function onMouseWheel( event ) {
 
   camera.position.z += event.deltaY * 0.1; // move camera along z-axis
-
 }
 
 function raycast(isMouseDown){
@@ -112,23 +142,20 @@ function raycast(isMouseDown){
 
 			if(isMouseDown && i==0){
 				let object = intersect.object
-				if(object.name=="12327_Statue_V1_L3"){
+				if(object.name=="12327_Statue_V1_L3"){	//CHANGE THE NAME OF OUR OBJECTS
 					//object.position.y+=0.5
 					camera.position.x = intersect.point.x
 					camera.position.z = intersect.point.z+1	//ADD THE CORRECT CAMERA ORIENTATION 
-					
+
 					//camera.lookAt(0,0,0)
 
 					console.log(intersect.point)
 				}
-				//highlight object
-				//let object = intersect.object
+
 				//console.log(object)
 				
 			}
-
-		} )
-
+		})
 	}
 }
 
