@@ -6,6 +6,7 @@ class Room {
 
 	constructor(){
 		this.room 
+		this.objectsToPick = []
 		console.log("creating Room object")
 	}
 
@@ -21,6 +22,7 @@ class Room {
 
 			this.room.traverse((child)=>{
 				this.objectsToPick.push(child)
+				console.log("child",child)
 			})
 
 			callback()
