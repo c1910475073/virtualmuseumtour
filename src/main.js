@@ -30,7 +30,7 @@ function init(){
 
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 10000)
 	
-	camera.position.set(0,0,2)
+	camera.position.set(0,-0.5,2)
 	//camera.lookAt(new THREE.Vector3(0,0,-5))
 
 	scene = new THREE.Scene()
@@ -96,17 +96,55 @@ function onMouseWheel( event ) {
 
 }
 
+function raycast(isMouseDown){
+
+	raycaster.setFromCamera(pointer, camera)
+
+	if(room.getRoom()){
+
+		let array1=room.objectsToPick
+		let array2=venus.objectsToPick
+		Array.prototype.push.apply(array1,array2)
+
+		let intersects = raycaster.intersectObjects(array1)
+		let i=0
+		intersects.forEach((intersect)=>{
+
+			if(isMouseDown && i==0){
+				let object = intersect.object
+				if(object.name=="12327_Statue_V1_L3"){
+					//object.position.y+=0.5
+					camera.position.x = intersect.point.x
+					camera.position.z = intersect.point.z+1	//ADD THE CORRECT CAMERA ORIENTATION 
+					
+					//camera.lookAt(0,0,0)
+
+					console.log(intersect.point)
+				}
+				//highlight object
+				//let object = intersect.object
+				//console.log(object)
+				
+			}
+
+		} )
+
+	}
+}
+
 function animate(){
 	requestAnimationFrame(animate)
 	
-	camera.position.x -= player.dx/20
-	camera.position.z -= player.dz/20
+	camera.position.x -= player.dx/30
+	camera.position.z -= player.dz/30
 
 	target.x = ( 1 - mouse.x ) * 0.002;
 	//target.y = ( 1 - mouse.y ) * 0.002;
 	
 	//camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
-	player.direction += 0.5 * ( target.x - camera.rotation.y );	//THE MOVEMENT ORIENTATION IS NOT THE SAME AS THE CAMERA
+	player.direction += 0.5 * ( target.x - camera.rotation.y );	
+	
+	/**********RESTRICT MOVEMENT TO ROOM AREA ONLY***************/
 
 	camera.rotation.y = player.direction
 
@@ -125,38 +163,7 @@ function onWindowResize(){
 }
 
 
-function raycast(isMouseDown){
 
-	raycaster.setFromCamera(pointer, camera)
-
-
-	if(room.getRoom()){
-
-
-		let array1=room.objectsToPick
-		let array2=venus.objectsToPick
-		Array.prototype.push.apply(array1,array2)
-
-		let intersects = raycaster.intersectObjects(array1)
-		let i=0
-		intersects.forEach((intersect)=>{
-
-			if(isMouseDown && i==0){
-				let object = intersect.object
-				if(object.name=="12327_Statue_V1_L3"){
-					object.position.y+=0.5
-					console.log(intersect)
-				}
-				//highlight object
-				//let object = intersect.object
-				console.log(object)
-				
-			}
-
-		} )
-
-}
-}
 
 
 
