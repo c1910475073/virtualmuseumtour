@@ -47,8 +47,8 @@ function init(){
 	// html body -> div container -> DOM (document object model) element of the renderer
 	container.appendChild(renderer.domElement)
 
-raycaster = new THREE.Raycaster()
-pointer = new THREE.Vector2()
+	raycaster = new THREE.Raycaster()
+	pointer = new THREE.Vector2()
 
 	document.addEventListener('mousemove', onMouseMove, false)
 	document.addEventListener('mousedown', onMouseDown, false)
@@ -102,15 +102,13 @@ function animate(){
 	camera.position.x -= player.dx/20
 	camera.position.z -= player.dz/20
 
-
 	target.x = ( 1 - mouse.x ) * 0.002;
 	//target.y = ( 1 - mouse.y ) * 0.002;
 	
 	//camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
 	player.direction += 0.5 * ( target.x - camera.rotation.y );	//THE MOVEMENT ORIENTATION IS NOT THE SAME AS THE CAMERA
 
-camera.rotation.y = player.direction
-
+	camera.rotation.y = player.direction
 
 	render()
 }

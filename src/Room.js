@@ -19,6 +19,10 @@ class Room {
 
 			this.room = gltf.scene
 
+			this.room.traverse((child)=>{
+				this.objectsToPick.push(child)
+			})
+
 			callback()
 		})
 	}
