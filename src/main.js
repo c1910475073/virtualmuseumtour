@@ -4,6 +4,9 @@ import { Room } from './Room.js'
 import { Player } from './Player.js'
 import { Venus } from './Venus.js'
 import { Dragon } from './Dragon.js'
+import { Roza } from './Roza.js'
+import { Nepal } from './Nepal.js'
+import { Lion } from './Lion.js'
 
 const mouse = new THREE.Vector2();
 const target = new THREE.Vector2();
@@ -20,6 +23,9 @@ let venus
 let raycaster
 let pointer
 let dragon
+let roza
+let nepal
+let lion
 
 init()
 initModels()
@@ -98,6 +104,15 @@ function initModels(){
 	dragon = new Dragon()
 	dragon.loadDragon(onDragonLoaded)
 
+	roza = new Roza()
+	roza.loadRoza(onRozaLoaded)
+
+	nepal = new Nepal()
+	nepal.loadNepal(onNepalLoaded)
+
+	lion = new Lion()
+	lion.loadLion(onLionLoaded)
+
 	player = new Player()
 }
 
@@ -114,6 +129,18 @@ function onVenusLoaded(){
 
 function onDragonLoaded(){
 	scene.add(dragon.getDragon())
+}
+
+function onRozaLoaded(){
+	scene.add(roza.getRoza())
+}
+
+function onNepalLoaded(){
+	scene.add(nepal.getNepal())
+}
+
+function onLionLoaded(){
+	scene.add(lion.getLion())
 }
 
 function onMouseMove( event ) {
@@ -143,9 +170,16 @@ function raycast(isMouseDown){
 		let array1=room.objectsToPick
 		let array2=venus.objectsToPick
 		let array3=dragon.objectsToPick
+		let array4=roza.objectsToPick
+		let array5=nepal.objectsToPick
+		let array6=lion.objectsToPick
+		
 
 		Array.prototype.push.apply(array1,array2)
 		Array.prototype.push.apply(array1,array3)
+		Array.prototype.push.apply(array1,array4)
+		Array.prototype.push.apply(array1,array5)
+		Array.prototype.push.apply(array1,array6)
 
 		let intersects = raycaster.intersectObjects(array1)
 		let i=0
