@@ -3,6 +3,7 @@ import { PointerLockControls } from '../lib/PointerLockControls.js'
 import { Room } from './Room.js'
 import { Player } from './Player.js'
 import { Venus } from './Venus.js'
+import { Dragon } from './Dragon.js'
 
 const mouse = new THREE.Vector2();
 const target = new THREE.Vector2();
@@ -18,7 +19,7 @@ let player
 let venus
 let raycaster
 let pointer
-let element
+let dragon
 
 init()
 initModels()
@@ -94,6 +95,9 @@ function initModels(){
 	venus = new Venus()
 	venus.loadVenus(onVenusLoaded)
 
+	dragon = new Dragon()
+	dragon.loadDragon(onDragonLoaded)
+
 	player = new Player()
 }
 
@@ -106,6 +110,10 @@ function onRoomLoaded(){
 function onVenusLoaded(){
 
 	scene.add(venus.getVenus())
+}
+
+function onDragonLoaded(){
+	scene.add(dragon.getDragon())
 }
 
 function onMouseMove( event ) {
@@ -134,7 +142,10 @@ function raycast(isMouseDown){
 
 		let array1=room.objectsToPick
 		let array2=venus.objectsToPick
+		let array3=dragon.objectsToPick
+
 		Array.prototype.push.apply(array1,array2)
+		Array.prototype.push.apply(array1,array3)
 
 		let intersects = raycaster.intersectObjects(array1)
 		let i=0
