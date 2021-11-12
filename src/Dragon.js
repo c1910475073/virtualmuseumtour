@@ -19,7 +19,7 @@ class Dragon {
 			console.log("Dragon loaded", gltf)
 
 			gltf.scene.scale.set(0.05,0.05,0.05)
-			gltf.scene.position.set(0.9,-0.9,0)
+			gltf.scene.position.set(3,-0.9,0)
 			this.dragon = gltf.scene
 			this.dragon.traverse((child)=>{
 				this.objectsToPick.push(child)

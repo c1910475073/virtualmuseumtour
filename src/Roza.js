@@ -18,8 +18,8 @@ class Roza {
 			//callback function that gets called when the model is loaded
 			console.log("Roza loaded", gltf)
 
-			gltf.scene.scale.set(0.002,0.002,0.002)
-			gltf.scene.position.set(-1.9,-0.5,0)
+			gltf.scene.scale.set(0.001,0.001,0.001)
+			gltf.scene.position.set(0.9,-0.5,5)
 			this.roza = gltf.scene
 			this.roza.traverse((child)=>{
 				this.objectsToPick.push(child)

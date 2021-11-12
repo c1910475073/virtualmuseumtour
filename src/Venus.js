@@ -19,7 +19,7 @@ class Venus {
 			console.log("Venus loaded", gltf)
 
 			gltf.scene.scale.set(0.07,0.07,0.07)
-			gltf.scene.position.set(0,-0.9,0)
+			gltf.scene.position.set(3,-0.9,5)
 			this.venus = gltf.scene
 			this.venus.traverse((child)=>{
 				this.objectsToPick.push(child)
