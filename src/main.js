@@ -88,7 +88,6 @@ function init(){
 
 	document.addEventListener('mousemove', onMouseMove, false)
 	document.addEventListener('mousedown', onMouseDown, false)
-	document.addEventListener('wheel', onMouseWheel, false)
 
 	window.addEventListener('resize', onWindowResize)
 
@@ -154,11 +153,6 @@ function onMouseDown(event){
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;	
 	raycast(true)
-}
-
-function onMouseWheel( event ) {
-
-  camera.position.z += event.deltaY * 0.1; // move camera along z-axis
 }
 
 function raycast(isMouseDown){

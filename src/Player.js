@@ -54,7 +54,7 @@ class Player{
 
 			} else if ( (event.keyCode == 65) || (event.keyCode == 37)){
 				//a or left
-				this.direction += 0.1
+				//this.direction += 0.1
 
 			} else if ( (event.keyCode == 83) || (event.keyCode == 40)){
 				//s or back
@@ -64,7 +64,7 @@ class Player{
 
 			} else if ( (event.keyCode == 68) || (event.keyCode == 39)){
 				//d or right
-				this.direction -= 0.1
+				//this.direction -= 0.1
 
 			} else if (event.keyCode == 81){
 				//camera up
