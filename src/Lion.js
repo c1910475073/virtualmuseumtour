@@ -18,8 +18,8 @@ class Lion {
 			//callback function that gets called when the model is loaded
 			console.log("Lion loaded", gltf)
 
-			gltf.scene.scale.set(0.2,0.2,0.22)
-			gltf.scene.position.set(0,1,0)
+			gltf.scene.scale.set(0.4,0.2,0.2)
+			gltf.scene.position.set(-1.5,1,8.5)
 			this.lion= gltf.scene
 			this.lion.traverse((child)=>{
 				this.objectsToPick.push(child)
