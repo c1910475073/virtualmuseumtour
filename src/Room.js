@@ -13,7 +13,7 @@ class Room {
 	loadRoom(callback){
 		let loader = new GLTFLoader().setPath('./assets/models/')
 
-		loader.load('Room2.glb', (gltf) => {
+		loader.load('Room2!.glb', (gltf) => {
 
 			//callback function that gets called when the model is loaded
 			console.log("room loaded", gltf)
