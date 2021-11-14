@@ -1,7 +1,7 @@
 import * as THREE from '../lib/three.module.js'
 import { PointerLockControls } from '../lib/PointerLockControls.js'
 import { Room } from './Room.js'
-import { Player } from './Player.js'
+
 import { Venus } from './Venus.js'
 import { Dragon } from './Dragon.js'
 import { Roza } from './Roza.js'
@@ -15,7 +15,7 @@ let scene
 let light
 let renderer
 let room
-let player
+
 let venus
 let dragon
 let roza
@@ -42,14 +42,14 @@ function init(){
 	container = document.createElement('div')	
 	document.body.appendChild(container)	
 
-	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 10000)
+	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 10000)
 	
-	camera.position.set(0,0,2)
+	camera.position.set(0,0,2)	//Camera's initial position
 
 	scene = new THREE.Scene()
 	scene.background = new THREE.Color(0xFFFFFF)	// 0xRRGGBB (RR is the level of red, GG green, and BB blue)
 
-	// scene.add(camera)
+	scene.add(camera)
 
 	light = new THREE.HemisphereLight(0x9999FF, 0xFFFF99, 1)
 	scene.add(light)
@@ -63,18 +63,18 @@ function init(){
 	//Pointer Lock Controls
 	controls = new PointerLockControls( camera, document.body );
 
-	instructions.addEventListener( 'click', function () {
+	instructions.addEventListener('click', function () {
 		
 		controls.lock();
 	});
 
-	controls.addEventListener( 'lock', function () {
+	controls.addEventListener('lock', function () {
 
 		instructions.style.display = 'none';
 		blocker.style.display = 'none';
 	});
 
-	controls.addEventListener( 'unlock', function () {
+	controls.addEventListener('unlock', function () {
 
 		blocker.style.display = 'block';
 		instructions.style.display = '';
@@ -133,8 +133,8 @@ function init(){
 		}
 	};
 
-	document.addEventListener( 'keydown', onKeyDown );
-	document.addEventListener( 'keyup', onKeyUp );
+	document.addEventListener('keydown', onKeyDown);
+	document.addEventListener('keyup', onKeyUp);
 
 	window.addEventListener('resize', onWindowResize)
 
@@ -159,16 +159,13 @@ function initModels(){
 	lion = new Lion()
 	lion.loadLion(onLionLoaded)
 
-	//player = new Player()
 }
 
 function onRoomLoaded(){
-
 	scene.add(room.getRoom())
 }
 
 function onVenusLoaded(){
-
 	scene.add(venus.getVenus())
 }
 
@@ -187,50 +184,6 @@ function onNepalLoaded(){
 function onLionLoaded(){
 	scene.add(lion.getLion())
 }
-
-/* function raycast(isMouseDown){
-
-	raycaster.setFromCamera(pointer, camera)
-
-	if(room.getRoom()){
-
-		let array1=room.objectsToPick
-		let array2=venus.objectsToPick
-		let array3=dragon.objectsToPick
-		let array4=roza.objectsToPick
-		let array5=nepal.objectsToPick
-		let array6=lion.objectsToPick
-		
-
-		Array.prototype.push.apply(array1,array2)
-		Array.prototype.push.apply(array1,array3)
-		Array.prototype.push.apply(array1,array4)
-		Array.prototype.push.apply(array1,array5)
-		Array.prototype.push.apply(array1,array6)
-
-		let intersects = raycaster.intersectObjects(array1)
-		let i=0
-		intersects.forEach((intersect)=>{
-
-			if(isMouseDown && i==0){
-				let object = intersect.object
-				if(object.name=="12327_Statue_V1_L3"){	//CHANGE THE NAME OF OUR OBJECTS
-					//object.position.y+=0.5
-					camera.position.x = intersect.point.x
-					camera.position.z = intersect.point.z+1	//ADD THE CORRECT CAMERA ORIENTATION 
-
-					//camera.lookAt(0,0,0)
-
-					console.log(intersect.point)
-				}
-
-				//console.log(object)
-				
-			}
-		})
-	}
-}
- */
 
 function animate(){
 	requestAnimationFrame(animate)
