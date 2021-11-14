@@ -31,7 +31,7 @@ function init(){
 
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 10000)
 	
-	camera.position.set(0,0,2)	//Camera's initial position
+	camera.position.set(0,0.4,2)	//Camera's initial position
 
 	scene = new THREE.Scene()
 	scene.background = new THREE.Color(0xFFFFFF)	// 0xRRGGBB (RR is the level of red, GG green, and BB blue)
