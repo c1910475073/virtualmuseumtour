@@ -11,14 +11,14 @@ class Room {
 	}
 
 	loadRoom(callback){
-		let loader = new GLTFLoader().setPath('./assets/models/')
+		let loader = new GLTFLoader().setPath('./assets/models/room/')
 
-		loader.load('Room221.glb', (gltf) => {
+		loader.load('room.gltf', (gltf) => {
 
 			//callback function that gets called when the model is loaded
 			console.log("room loaded", gltf)
 
-			gltf.scene.position.set(-4,-1,-5)
+			gltf.scene.position.set(-4,-0.5,-5)
 			this.room = gltf.scene
 
 			this.room.traverse((child)=>{

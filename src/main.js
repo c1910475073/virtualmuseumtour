@@ -2,25 +2,12 @@ import * as THREE from '../lib/three.module.js'
 import { PointerLockControls } from '../lib/PointerLockControls.js'
 import { Room } from './Room.js'
 
-import { Venus } from './Venus.js'
-import { Dragon } from './Dragon.js'
-import { Roza } from './Roza.js'
-import { Nepal } from './Nepal.js'
-import { Lion } from './Lion.js'
-
-
 let container
 let camera
 let scene
 let light
 let renderer
 let room
-
-let venus
-let dragon
-let roza
-let nepal
-let lion
 
 let moveForward = false;
 let moveBackward = false;
@@ -143,46 +130,10 @@ function init(){
 function initModels(){
 	room = new Room()
 	room.loadRoom(onRoomLoaded)
-
-	venus = new Venus()
-	venus.loadVenus(onVenusLoaded)
-
-	dragon = new Dragon()
-	dragon.loadDragon(onDragonLoaded)
-
-	roza = new Roza()
-	roza.loadRoza(onRozaLoaded)
-
-	nepal = new Nepal()
-	nepal.loadNepal(onNepalLoaded)
-
-	lion = new Lion()
-	lion.loadLion(onLionLoaded)
-
 }
 
 function onRoomLoaded(){
 	scene.add(room.getRoom())
-}
-
-function onVenusLoaded(){
-	scene.add(venus.getVenus())
-}
-
-function onDragonLoaded(){
-	scene.add(dragon.getDragon())
-}
-
-function onRozaLoaded(){
-	scene.add(roza.getRoza())
-}
-
-function onNepalLoaded(){
-	scene.add(nepal.getNepal())
-}
-
-function onLionLoaded(){
-	scene.add(lion.getLion())
 }
 
 function animate(){
