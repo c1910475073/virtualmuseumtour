@@ -1,5 +1,5 @@
 import * as THREE from '../lib/three.module.js'
-import { PointerLockControls } from '../lib/PointerLockControls.js'////////
+import { PointerLockControls } from '../lib/PointerLockControls.js'
 import { Room } from './Room.js'
 import { Player } from './Player.js'
 import { Venus } from './Venus.js'
@@ -8,9 +8,6 @@ import { Roza } from './Roza.js'
 import { Nepal } from './Nepal.js'
 import { Lion } from './Lion.js'
 
-const mouse = new THREE.Vector2();
-const target = new THREE.Vector2();
-const windowHalf = new THREE.Vector2( window.innerWidth/2, window.innerHeight/2 );
 
 let container
 let camera
@@ -20,8 +17,6 @@ let renderer
 let room
 let player
 let venus
-let raycaster
-let pointer
 let dragon
 let roza
 let nepal
@@ -36,8 +31,6 @@ let controls
 let prevTime = performance.now();
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
-
-const objects = [];
 			
 
 init()
@@ -46,14 +39,12 @@ animate()
 
 function init(){
 
-	console.log("hello world")
-
 	container = document.createElement('div')	
 	document.body.appendChild(container)	
 
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 10000)
 	
-	camera.position.set(0,-0.5,2)
+	camera.position.set(0,0,2)
 
 	scene = new THREE.Scene()
 	scene.background = new THREE.Color(0xFFFFFF)	// 0xRRGGBB (RR is the level of red, GG green, and BB blue)
@@ -69,10 +60,8 @@ function init(){
 	// html body -> div container -> DOM (document object model) element of the renderer
 	container.appendChild(renderer.domElement)
 
-	//raycaster = new THREE.Raycaster()
-	pointer = new THREE.Vector2()
+	//Pointer Lock Controls
 	controls = new PointerLockControls( camera, document.body );
-
 
 	instructions.addEventListener( 'click', function () {
 		
@@ -91,11 +80,7 @@ function init(){
 		instructions.style.display = '';
 	});
 
-	///////////
-	scene.add( controls.getObject() );
-	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
-	////////////
-
+	//Player movement
 	const onKeyDown = function ( event ) {
 
 		switch ( event.code ) {
@@ -203,20 +188,7 @@ function onLionLoaded(){
 	scene.add(lion.getLion())
 }
 
-/* function onMouseMove( event ) {
-
-	mouse.x = ( event.clientX - windowHalf.x );
-	mouse.y = ( event.clientY - windowHalf.x );
-}
-
-function onMouseDown(event){
-
-	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;	
-	raycast(true)
-} */
-
-function raycast(isMouseDown){
+/* function raycast(isMouseDown){
 
 	raycaster.setFromCamera(pointer, camera)
 
@@ -258,38 +230,19 @@ function raycast(isMouseDown){
 		})
 	}
 }
+ */
 
 function animate(){
 	requestAnimationFrame(animate)
-	
-	/* camera.position.x -= player.dx/30
-	camera.position.z -= player.dz/30
-
-	target.x = ( 1 - mouse.x ) * 0.002;
-	//target.y = ( 1 - mouse.y ) * 0.002;
-	
-	//camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
-	player.direction += 0.5 * ( target.x - camera.rotation.y );	
-
-	camera.rotation.y = player.direction */
 
 	const time = performance.now();
 
 	if ( controls.isLocked === true ) {
 
-		raycaster.ray.origin.copy( controls.getObject().position );
-		raycaster.ray.origin.y -= 10;
-
-		const intersections = raycaster.intersectObjects( objects, false );
-
-		const onObject = intersections.length > 0;
-
 		const delta = ( time - prevTime ) / 1000;
 
 		velocity.x -= velocity.x * 10.0 * delta;
 		velocity.z -= velocity.z * 10.0 * delta;
-
-		velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
 
 		direction.z = Number( moveForward ) - Number( moveBackward );
 		direction.x = Number( moveRight ) - Number( moveLeft );
@@ -298,26 +251,8 @@ function animate(){
 		if ( moveForward || moveBackward ) velocity.z -= direction.z * 40.0 * delta;
 		if ( moveLeft || moveRight ) velocity.x -= direction.x * 40.0 * delta;
 
-		if ( onObject === true ) {
-
-			velocity.y = Math.max( 0, velocity.y );
-			//canJump = true;
-
-		}
-
 		controls.moveRight( - velocity.x * delta );
 		controls.moveForward( - velocity.z * delta );
-
-		controls.getObject().position.y += ( velocity.y * delta ); // new behavior
-
-		if ( controls.getObject().position.y < 0 ) {
-
-		velocity.y = 0;
-		controls.getObject().position.y = 0;
-
-		//canJump = true;
-
-		} 
 	}
 
 	prevTime = time;
