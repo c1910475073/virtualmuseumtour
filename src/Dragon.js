@@ -18,7 +18,7 @@ class Dragon {
 			//callback function that gets called when the model is loaded
 			console.log("Dragon loaded", gltf)
 
-			gltf.scene.scale.set(0.08,0.05,0.05)
+			gltf.scene.scale.set(0.07,0.07,0.07)
 			gltf.scene.position.set(7.5,-0.9,10.3)
 			this.dragon = gltf.scene
 			this.dragon.traverse((child)=>{

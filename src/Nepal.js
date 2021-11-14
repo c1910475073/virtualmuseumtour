@@ -18,8 +18,8 @@ class Nepal {
 			//callback function that gets called when the model is loaded
 			console.log("Nepal loaded", gltf)
 
-			gltf.scene.scale.set(0.04,0.02,0.02)
-			gltf.scene.position.set(9,-0.9,-2)
+			gltf.scene.scale.set(0.02,0.02,0.02)
+			gltf.scene.position.set(8,-0.9,-2)
 			this.nepal = gltf.scene
 			this.nepal.traverse((child)=>{
 				this.objectsToPick.push(child)

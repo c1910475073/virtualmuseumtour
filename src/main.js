@@ -206,7 +206,7 @@ function animate(){
 
 		controls.moveRight( - velocity.x * delta );
 		controls.moveForward( - velocity.z * delta );
-	}
+	} 
 
 	prevTime = time;
 
