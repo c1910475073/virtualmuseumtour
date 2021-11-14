@@ -51,7 +51,7 @@ function init(){
 
 	scene.add(camera)
 
-	light = new THREE.HemisphereLight(0x9999FF, 0xFFFF99, 1)
+	light = new THREE.HemisphereLight(0xF3F3F3, 0xF3F3F3, 1)
 	scene.add(light)
 
 	renderer = new THREE.WebGLRenderer()
